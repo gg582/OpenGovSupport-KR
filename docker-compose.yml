@@ -60,6 +60,9 @@ services:
     build:
       context: ./src/frontend
       dockerfile: Dockerfile
+      args:
+        # Baked into the /api/* rewrite at build time (standalone output).
+        BACKEND_URL: "${BACKEND_URL:-http://backend:8080}"
     image: opengovsupport-frontend:latest
     container_name: opengovsupport-frontend
     restart: unless-stopped
@@ -69,7 +72,7 @@ services:
       # next.config.mjs reads BACKEND_URL at *build* time for the rewrite
       # destination. We pass it again at runtime for any server-side fetch
       # in app/lib/api.ts (listFeatures / callFeature on the server).
-      BACKEND_URL: "http://backend:8080"
+      BACKEND_URL: "${BACKEND_URL:-http://backend:8080}"
       # Required so Next.js binds 0.0.0.0 inside the container.
       HOSTNAME: "0.0.0.0"
     depends_on:

@@ -9,6 +9,11 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+# next.config.mjs bakes the /api/* rewrite destination at build time
+# (output: "standalone" snapshots rewrites). Must be passed as an ARG —
+# runtime env alone is not enough.
+ARG BACKEND_URL=http://backend:8080
+ENV BACKEND_URL=${BACKEND_URL}
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
