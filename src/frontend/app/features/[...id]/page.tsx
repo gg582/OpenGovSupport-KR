@@ -18,7 +18,7 @@ export default async function FeaturePage({
 
   return (
     <div className="space-y-4">
-      <nav className="text-xs text-navy/60 flex gap-1.5 items-center" aria-label="breadcrumb">
+      <nav className="text-xs text-navy/60 flex flex-wrap gap-x-1.5 gap-y-1 items-center" aria-label="breadcrumb">
         <Link href="/" className="hover:text-accent">전체 기능</Link>
         <span>/</span>
         <span className="font-mono">{feature.domainKey}</span>

@@ -99,7 +99,7 @@
     @apply bg-white border border-line;
   }
   .panel-header {
-    @apply border-b-[2px] border-b-navy px-4 py-3 flex items-center gap-2 text-base
+    @apply border-b-[2px] border-b-navy px-4 py-3 flex flex-wrap items-center gap-2 text-base
            font-semibold tracking-tighter;
   }
   .panel-header::before {
@@ -124,3 +124,88 @@
     @apply border-l-accent bg-navy-50 text-navy font-semibold;
   }
 }
+
+/* Mobile-only adjustments. Desktop layout is intentionally untouched. */
+@media (max-width: 767px) {
+  /* Stack form rows: label sits above the value as a small caps caption. */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .form-row > .label {
+    background-color: transparent;
+    padding: 10px 12px 2px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgb(26 50 88 / 0.65);
+  }
+  .form-row > .value {
+    padding: 0 12px 12px;
+  }
+
+  /* Tables — opt out by adding `gov-table--scroll` (kept inside overflow-x). */
+  .gov-table:not(.gov-table--scroll) {
+    border-top-width: 0;
+    background-color: transparent;
+  }
+  .gov-table:not(.gov-table--scroll) thead {
+    display: none;
+  }
+  .gov-table:not(.gov-table--scroll),
+  .gov-table:not(.gov-table--scroll) tbody {
+    display: block;
+    width: 100%;
+  }
+
+  /* Form-style rows (th + td) — render as label/value grid per row. */
+  .gov-table:not(.gov-table--scroll) tbody tr:has(> th):has(> td) {
+    display: grid;
+    grid-template-columns: minmax(0, 38%) 1fr;
+    align-items: baseline;
+    column-gap: 12px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #D1D5DB;
+    background-color: #fff;
+  }
+  .gov-table:not(.gov-table--scroll) tbody tr:has(> th):has(> td) > th,
+  .gov-table:not(.gov-table--scroll) tbody tr:has(> th):has(> td) > td {
+    border: 0;
+    padding: 2px 0;
+    background: transparent !important;
+    width: auto !important;
+    white-space: normal;
+    text-align: left;
+  }
+  .gov-table:not(.gov-table--scroll) tbody tr:has(> th):has(> td) > th {
+    font-weight: 500;
+    font-size: 12px;
+    color: rgb(26 50 88 / 0.7);
+  }
+
+  /* Record-style rows (td only) — stack each cell as a card. */
+  .gov-table:not(.gov-table--scroll) tbody tr:not(:has(> th)) {
+    display: block;
+    padding: 10px 12px;
+    border-bottom: 1px solid #D1D5DB;
+    background-color: #fff;
+  }
+  .gov-table:not(.gov-table--scroll) tbody tr:not(:has(> th)):hover {
+    background-color: rgb(241 244 249 / 0.6);
+  }
+  .gov-table:not(.gov-table--scroll) tbody tr:not(:has(> th)) > td {
+    display: block;
+    width: auto !important;
+    border: 0;
+    padding: 2px 0;
+    text-align: left !important;
+  }
+
+  /* "Empty state" row spans the full width. */
+  .gov-table:not(.gov-table--scroll) tbody tr > td[colspan] {
+    display: block;
+    width: 100%;
+    padding: 16px 12px;
+    text-align: center !important;
+  }
+}
+

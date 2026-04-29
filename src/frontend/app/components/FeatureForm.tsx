@@ -265,7 +265,7 @@ function RowsField({
   const cols = input.columns ?? [];
   return (
     <>
-      <table className="gov-table">
+      <table className="gov-table gov-table--scroll min-w-[640px]">
         <thead>
           <tr>
             <th className="w-[40px] text-center">No.</th>

@@ -77,16 +77,18 @@ function DomainSection({
       <table className="gov-table">
         <thead>
           <tr>
-            <th className="w-[50px]">No.</th>
+            <th className="w-[50px] hidden md:table-cell">No.</th>
             <th className="w-[220px]">기능명</th>
             <th>설명</th>
-            <th className="w-[100px] text-center">실행</th>
+            <th className="w-[100px] text-center hidden md:table-cell">실행</th>
           </tr>
         </thead>
         <tbody>
           {items.map((f, i) => (
             <tr key={f.id}>
-              <td className="text-center font-mono text-navy/70">{String(i + 1).padStart(2, "0")}</td>
+              <td className="text-center font-mono text-navy/70 hidden md:table-cell">
+                {String(i + 1).padStart(2, "0")}
+              </td>
               <td>
                 <Link
                   href={`/features/${encodeURI(f.id)}`}
@@ -96,7 +98,7 @@ function DomainSection({
                 </Link>
               </td>
               <td className="text-navy/80">{f.summary}</td>
-              <td className="text-center">
+              <td className="text-center hidden md:table-cell">
                 <Link
                   href={`/features/${encodeURI(f.id)}`}
                   className="btn-secondary !py-1 !px-2 text-xs"
